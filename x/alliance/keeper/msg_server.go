@@ -4,8 +4,6 @@ import (
 	"context"
 
 	"github.com/terra-money/alliance/x/alliance/types"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type MsgServer struct {
@@ -15,126 +13,125 @@ type MsgServer struct {
 var _ types.MsgServer = MsgServer{}
 
 func (m MsgServer) Delegate(ctx context.Context, msg *types.MsgDelegate) (*types.MsgDelegateResponse, error) {
-	err := msg.ValidateBasic()
-	if err != nil {
-		return nil, err
-	}
+	// err := msg.ValidateBasic()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
-	if err != nil {
-		return nil, err
-	}
-	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
-	if err != nil {
-		return nil, err
-	}
+	// delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// sdkCtx := sdk.UnwrapSDKContext(ctx)
+	// valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
-	if err != nil {
-		return nil, err
-	}
+	// validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	_, err = m.Keeper.Delegate(sdkCtx, delAddr, validator, msg.Amount)
-	if err != nil {
-		return nil, err
-	}
+	// _, err = m.Keeper.Delegate(sdkCtx, delAddr, validator, msg.Amount)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	return &types.MsgDelegateResponse{}, nil
+	return &types.MsgDelegateResponse{}, types.ErrDisableAllienceModule
 }
 
 func (m MsgServer) Redelegate(ctx context.Context, msg *types.MsgRedelegate) (*types.MsgRedelegateResponse, error) {
-	err := msg.ValidateBasic()
-	if err != nil {
-		return nil, err
-	}
+	// err := msg.ValidateBasic()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
-	if err != nil {
-		return nil, err
-	}
+	// sdkCtx := sdk.UnwrapSDKContext(ctx)
+	// delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	srcValAddr, err := sdk.ValAddressFromBech32(msg.ValidatorSrcAddress)
-	if err != nil {
-		return nil, err
-	}
-	dstValAddr, err := sdk.ValAddressFromBech32(msg.ValidatorDstAddress)
-	if err != nil {
-		return nil, err
-	}
+	// srcValAddr, err := sdk.ValAddressFromBech32(msg.ValidatorSrcAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// dstValAddr, err := sdk.ValAddressFromBech32(msg.ValidatorDstAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	srcValidator, err := m.Keeper.GetAllianceValidator(sdkCtx, srcValAddr)
-	if err != nil {
-		return nil, err
-	}
+	// srcValidator, err := m.Keeper.GetAllianceValidator(sdkCtx, srcValAddr)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	dstValidator, err := m.Keeper.GetAllianceValidator(sdkCtx, dstValAddr)
-	if err != nil {
-		return nil, err
-	}
+	// dstValidator, err := m.Keeper.GetAllianceValidator(sdkCtx, dstValAddr)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	_, err = m.Keeper.Redelegate(sdkCtx, delAddr, srcValidator, dstValidator, msg.Amount)
-	if err != nil {
-		return nil, err
-	}
+	// _, err = m.Keeper.Redelegate(sdkCtx, delAddr, srcValidator, dstValidator, msg.Amount)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	return &types.MsgRedelegateResponse{}, nil
+	return &types.MsgRedelegateResponse{}, types.ErrDisableAllienceModule
 }
 
 func (m MsgServer) Undelegate(ctx context.Context, msg *types.MsgUndelegate) (*types.MsgUndelegateResponse, error) {
-	err := msg.ValidateBasic()
-	if err != nil {
-		return nil, err
-	}
+	// err := msg.ValidateBasic()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
-	if err != nil {
-		return nil, err
-	}
-	valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
-	if err != nil {
-		return nil, err
-	}
+	// sdkCtx := sdk.UnwrapSDKContext(ctx)
+	// delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
-	if err != nil {
-		return nil, err
-	}
+	// validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	_, err = m.Keeper.Undelegate(sdkCtx, delAddr, validator, msg.Amount)
-	if err != nil {
-		return nil, err
-	}
+	// _, err = m.Keeper.Undelegate(sdkCtx, delAddr, validator, msg.Amount)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	return &types.MsgUndelegateResponse{}, nil
+	return &types.MsgUndelegateResponse{}, types.ErrDisableAllienceModule
 }
 
 func (m MsgServer) ClaimDelegationRewards(ctx context.Context, msg *types.MsgClaimDelegationRewards) (*types.MsgClaimDelegationRewardsResponse, error) {
-	err := msg.ValidateBasic()
-	if err != nil {
-		return nil, err
-	}
+	// err := msg.ValidateBasic()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
-	if err != nil {
-		return nil, err
-	}
-	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
-	if err != nil {
-		return nil, err
-	}
+	// delAddr, err := sdk.AccAddressFromBech32(msg.DelegatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// sdkCtx := sdk.UnwrapSDKContext(ctx)
+	// valAddr, err := sdk.ValAddressFromBech32(msg.ValidatorAddress)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
-	if err != nil {
-		return nil, err
-	}
+	// validator, err := m.Keeper.GetAllianceValidator(sdkCtx, valAddr)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	_, err = m.Keeper.ClaimDelegationRewards(sdkCtx, delAddr, validator, msg.Denom)
-
-	return &types.MsgClaimDelegationRewardsResponse{}, err
+	// _, err = m.Keeper.ClaimDelegationRewards(sdkCtx, delAddr, validator, msg.Denom)
+	return &types.MsgClaimDelegationRewardsResponse{}, types.ErrDisableAllienceModule
 }
 
 // NewMsgServerImpl returns an implementation of the MsgServer interface
